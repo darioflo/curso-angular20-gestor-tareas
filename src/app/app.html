@@ -1,29 +1,57 @@
-<main>
-  <h1>{{ title }}</h1>
-
+<main class="background">
   <div class="nueva-tarea">
-    <input
-      type="text"
-      #inputTarea
-      placeholder="Nueva Tarea"
-      (keyup.enter)="agregar(inputTarea.value); inputTarea.value = ''"
-    />
+    <h1>{{ title }}</h1>
 
-    <button (click)="agregar(inputTarea.value); inputTarea.value = ''">Agregar</button>
-  </div>
+    <div class="resumen">
+      <div class="resumen-card">
+        <span class="resumen-label">Total</span>
+        <strong>{{ totalTareas() }}</strong>
+      </div>
+      <div class="resumen-card">
+        <span class="resumen-label">Pendientes</span>
+        <strong>{{ tareasPendientes() }}</strong>
+      </div>
+      <div class="resumen-card">
+        <span class="resumen-label">Completadas</span>
+        <strong>{{ tareasCompletadas() }}</strong>
+      </div>
+    </div>
 
-  <ul>
-    @for (tarea of tareas(); track tarea.id) {
-      <li (click)="toggle(tarea.id)" [class.hecha]="tarea.completada">
-        {{ tarea.titulo }}
-        @if (tarea.completada) {
-          <span>Ok</span>
+    <div class="task">
+      <input
+        type="text"
+        #inputTarea
+        placeholder="Tarea nueva"
+        (keyup.enter)="agregar(inputTarea.value); inputTarea.value = ''"
+      />
+      <button class="button" (click)="agregar(inputTarea.value); inputTarea.value = ''">
+        Agregar
+      </button>
+    </div>
+    <div class="task">
+      <ul>
+        @for (tarea of tareas(); track tarea.id) {
+          <li (click)="toggle(tarea.id)" [class.hecha]="tarea.completada">
+            {{ tarea.titulo }}
+            <button class="button" (click)="mostrarAlerta(tarea.id)">Eliminar tarea</button>
+          </li>
+          @if (tarea.completada) {
+            <span>Ok</span>
+          }
+        } @empty {
+          <li>No hay tareas</li>
         }
-      </li>
-    } @empty {
-      <li>No hay tareas. Agrega una!!</li>
-    }
-  </ul>
+      </ul>
+    </div>
+  </div>
 </main>
-
+@if (eliminarTarea) {
+  <div class="alerta">
+    <div class="alerta-content">
+      <p>Desea eliminar esta tarea?</p>
+      <button class="button" (click)="eliminar()">Eliminar</button>
+      <button class="button" (click)="eliminarTarea = false">Cancelar</button>
+    </div>
+  </div>
+}
 <router-outlet />
