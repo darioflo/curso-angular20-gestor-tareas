@@ -24,16 +24,28 @@
         placeholder="Tarea nueva"
         (keyup.enter)="store.agregar(inputTarea.value); inputTarea.value = ''"
       />
-      <button class="button" (click)="store.agregar(inputTarea.value); inputTarea.value = ''">
+      <button class="button btn-agregar" (click)="store.agregar(inputTarea.value); inputTarea.value = ''">
         Agregar
       </button>
+      @if (store.tareasCompletadas() > 0) {
+        <button class="button btn-completar" (click)="store.eliminarCompletadas()">
+        Eliminar completadas
+      </button>
+      }
     </div>
     <div class="task">
       <ul>
         @for (tarea of store.tareas(); track tarea.id) {
-          <li (click)="store.toggle(tarea.id)" [class.hecha]="tarea.completada">
-            {{ tarea.titulo }}
-            <button class="button" (click)="store.mostrarAlerta(tarea.id)">Eliminar tarea</button>
+          <li [class.hecha]="tarea.completada" class="task-item">
+            <span>{{ tarea.titulo }}</span>
+            <div class="task-acciones">
+              <button class="button btn-completar" (click)="store.toggle(tarea.id); $event.stopPropagation()">
+                {{ tarea.completada ? 'Desmarcar' : 'Completada' }}
+              </button>
+              <button class="button btn-eliminar" (click)="store.mostrarAlerta(tarea.id); $event.stopPropagation()">
+                Eliminar tarea
+              </button>
+            </div>
           </li>
           @if (tarea.completada) {
             <span>Ok</span>

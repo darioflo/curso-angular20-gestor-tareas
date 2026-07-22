@@ -103,7 +103,7 @@ h1 {
   width: 90%;
 }
 
-.nueva-tarea button {
+.btn-agregar {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
@@ -124,9 +124,11 @@ ul {
 li {
   padding: 0.6rem 0.75rem;
   margin-bottom: 0.4rem;
-  cursor: pointer;
+  cursor: default;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
   background: #fff;
   width: 100%;
   border-radius: 6px;
@@ -134,6 +136,45 @@ li {
 
 li:hover {
   background: #f79dda;
+}
+
+.task-acciones {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.task-acciones .button {
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.task-acciones .button:hover {
+  transform: translateY(-1px);
+}
+
+.btn-completar {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(228, 14, 67, 0.25);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: linear-gradient(90deg, rgb(12, 153, 88), rgb(67, 206, 118));
+  box-shadow: 0 4px 12px rgba(12, 153, 88, 0.3);
+}
+
+.btn-eliminar {
+  background: linear-gradient(90deg, rgb(175, 20, 224), rgb(228, 14, 67));
+  box-shadow: 0 4px 12px rgba(228, 14, 67, 0.25);
 }
 
 .hecha {

@@ -12,11 +12,7 @@ export class TaskStore {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.tareas()));
     });
   }
-  tareas = signal<Task[]>([
-    { id: 1, titulo: 'Aprender angular', completada: false },
-    { id: 2, titulo: 'Construir proyecto nuevo', completada: false },
-    { id: 3, titulo: 'Dominar signals', completada: false },
-  ]);
+  tareas = signal<Task[]>(this.cargar());
   eliminarTarea: boolean = false;
   idTarea!: number;
   totalTareas = computed(() => this.tareas().length);
@@ -61,5 +57,8 @@ export class TaskStore {
       { id: 2, titulo: 'Construir un proyecto nuevo', completada: false },
       { id: 3, titulo: 'Dominar signals', completada: true },
     ];
+  }
+  public eliminarCompletadas(): void {
+    this.tareas.update((lista) => lista.filter((tarea) => !tarea.completada));
   }
 }
