@@ -1,1 +1,16 @@
-<p>task-form works!</p>
+    <div class="task">
+      <input
+        type="text"
+        #inputTarea
+        placeholder="Tarea nueva"
+        (keyup.enter)="agregado.emit(inputTarea.value); inputTarea.value = ''"
+      />
+      <button class="button btn-agregar" (click)="agregado.emit(inputTarea.value); inputTarea.value = ''">
+        Agregar
+      </button>
+      @if ((tareasCompletadas() ?? 0) > 0) {
+        <button class="button btn-completar" (click)="eliminarCompletadas.emit()">
+        Eliminar completadas
+      </button>
+      }
+    </div>

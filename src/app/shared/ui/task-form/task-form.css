@@ -1,0 +1,38 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75vw;
+}
+
+.task input {
+  width: 90%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.btn-agregar {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgb(175, 20, 224), rgb(228, 14, 67));
+  color: white;
+  box-shadow: 0 4px 12px rgba(228, 14, 67, 0.25);
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.btn-completar {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(228, 14, 67, 0.25);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  background: linear-gradient(90deg, rgb(12, 153, 88), rgb(67, 206, 118));
+  box-shadow: 0 4px 12px rgba(12, 153, 88, 0.3);
+  width: 20%;
+}

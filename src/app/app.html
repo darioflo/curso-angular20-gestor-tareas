@@ -17,22 +17,12 @@
       </div>
     </div>
 
-    <div class="task">
-      <input
-        type="text"
-        #inputTarea
-        placeholder="Tarea nueva"
-        (keyup.enter)="store.agregar(inputTarea.value); inputTarea.value = ''"
-      />
-      <button class="button btn-agregar" (click)="store.agregar(inputTarea.value); inputTarea.value = ''">
-        Agregar
-      </button>
-      @if (store.tareasCompletadas() > 0) {
-        <button class="button btn-completar" (click)="store.eliminarCompletadas()">
-        Eliminar completadas
-      </button>
-      }
-    </div>
+  <app-task-form
+      [tareasCompletadas]="store.tareasCompletadas()"
+      (agregado)="store.agregar($event)"
+      (eliminarCompletadas)="store.eliminarCompletadas()">
+    </app-task-form>
+
     <div class="task">
       <ul>
         @for (tarea of store.tareas(); track tarea.id) {
