@@ -36,17 +36,11 @@
     <div class="task">
       <ul>
         @for (tarea of store.tareas(); track tarea.id) {
-          <li [class.hecha]="tarea.completada" class="task-item">
-            <span>{{ tarea.titulo }}</span>
-            <div class="task-acciones">
-              <button class="button btn-completar" (click)="store.toggle(tarea.id); $event.stopPropagation()">
-                {{ tarea.completada ? 'Desmarcar' : 'Completada' }}
-              </button>
-              <button class="button btn-eliminar" (click)="store.mostrarAlerta(tarea.id); $event.stopPropagation()">
-                Eliminar tarea
-              </button>
-            </div>
-          </li>
+          <app-task-item
+            [task]="tarea"
+            (toggle)="store.toggle(tarea.id)"
+            (removed)="store.mostrarAlerta(tarea.id)">
+          </app-task-item>
           @if (tarea.completada) {
             <span>Ok</span>
           }

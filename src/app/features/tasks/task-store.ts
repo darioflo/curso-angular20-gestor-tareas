@@ -18,6 +18,7 @@ export class TaskStore {
   totalTareas = computed(() => this.tareas().length);
   tareasPendientes = computed(() => this.totalTareas() - this.tareasCompletadas());
   tareasCompletadas = computed(() => this.tareas().filter((tarea) => tarea.completada).length);
+  public api : string= 'https://jsonplaceholder.typicode.com/todos?_limit=5';
 
   agregar(tarea: string) {
     const limpio = tarea.trim();

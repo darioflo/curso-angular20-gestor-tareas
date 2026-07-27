@@ -1,0 +1,11 @@
+<li [class.hecha]="task().completada" class="task-item">
+            <span>{{ task().titulo }}</span>
+            <div class="task-acciones">
+              <button class="button btn-completar" (click)="toggle.emit(task().id); $event.stopPropagation()">
+                {{ task().completada ? 'Desmarcar' : 'Completada' }}
+              </button>
+              <button class="button btn-eliminar" (click)="removed.emit(task().id); $event.stopPropagation()">
+                Eliminar tarea
+              </button>
+            </div>
+          </li>

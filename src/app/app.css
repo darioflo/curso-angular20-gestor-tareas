@@ -326,3 +326,60 @@ li:hover {
   color: #7a0034;
   border: 1px solid #e7bed0;
 }
+
+
+.contador {
+  color: #666;
+  margin-top: 0;
+}
+
+.nueva-tarea {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.nueva-tarea input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.nueva-tarea button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #d81b60;
+  color: white;
+  cursor: pointer;
+}
+
+.cargar {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d81b60;
+  border-radius: 6px;
+  background: transparent;
+  color: #d81b60;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.estado {
+  color: #666;
+}
+
+.error {
+  color: #c62828;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.vacio {
+  padding: 0.6rem 0.75rem;
+  color: #999;
+  text-align: center;
+}
