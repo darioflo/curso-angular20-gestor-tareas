@@ -1,12 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { computed, effect, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Task } from './Task';
+
+const STORAGE_KEY = 'tareas'; 
+const API_URL = 'https://jsonplaceholder.typicode.com/todos?_limit=5';
+interface TodoApi {
+  id: number;
+  title: string;
+  completed: boolean;
+}
 @Injectable({
   providedIn: 'root',
 })
+
 export class TaskStore {
   public readonly title = 'Gestor de Tareas';
   STORAGE_KEY = 'tareas';
+  private readonly http = inject(HttpClient);
   constructor() {
     effect(() => {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.tareas()));
@@ -16,9 +27,10 @@ export class TaskStore {
   eliminarTarea: boolean = false;
   idTarea!: number;
   totalTareas = computed(() => this.tareas().length);
+  cargando = signal(false);
+  error = signal('');
   tareasPendientes = computed(() => this.totalTareas() - this.tareasCompletadas());
   tareasCompletadas = computed(() => this.tareas().filter((tarea) => tarea.completada).length);
-  public api : string= 'https://jsonplaceholder.typicode.com/todos?_limit=5';
 
   agregar(tarea: string) {
     const limpio = tarea.trim();
@@ -61,5 +73,26 @@ export class TaskStore {
   }
   public eliminarCompletadas(): void {
     this.tareas.update((lista) => lista.filter((tarea) => !tarea.completada));
+  }
+
+  cargarEjemplos(){
+    this.cargando.set(true);
+    this.error.set('');
+    this.http.get<TodoApi[]>(API_URL).subscribe({
+      next: (data) => {
+        const tareas = data.map((item) => ({
+          id: item.id,
+          titulo: item.title,
+          completada: item.completed,
+        }));
+        this.tareas.set(tareas);
+        this.cargando.set(false);
+      },
+      error: (err) => {
+        console.log('Error al cargar las tareas de ejemplo: ', err);
+        this.error.set('Error al cargar las tareas de ejemplo: ' + err.message);
+        this.cargando.set(false);
+      },
+    });
   }
 }

@@ -22,7 +22,13 @@
       (agregado)="store.agregar($event)"
       (eliminarCompletadas)="store.eliminarCompletadas()">
     </app-task-form>
-
+    <button class="cargar" (click)="store.cargarEjemplos()">Cargar ejemplos de la API</button>
+    @if(store.cargando()){
+      <p class="estado">Cargando...</p>
+    }
+    @if(store.error()){
+      <p class="estado error">{{ store.error() }}</p>
+    }
     <div class="task">
       <ul>
         @for (tarea of store.tareas(); track tarea.id) {
